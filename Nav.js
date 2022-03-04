@@ -1,36 +1,25 @@
 import * as React from 'react';
-import { Button, View, Text, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { useSelector, useDispatch } from 'react-redux'
-import { increment } from './src/features/expense.slice'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen({ navigation }) {
-  
-  const expense = useSelector(state => state.expense.value)
+import Home from './src/container/Home';
+import NewExpense from './src/component/home/NewExpense';
+import Category from './src/container/Category';
 
-  const dispatch = useDispatch()
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Count {expense}</Text>
-      {/* <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      /> */}
-      <TouchableOpacity onPress={() => { dispatch(increment()) }}>
-        <Text>Increment</Text>
-      </TouchableOpacity>
-    </View>
+////////////////////////////////////////////////////////////////////////////////////
+
+const Stack = createNativeStackNavigator();
+
+function HomeStack() {
+  return ( <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home}   options={{headerShown:false}}/>
+        <Stack.Screen name="NewExpense" component={NewExpense}   options={{headerShown:false}} />
+      </Stack.Navigator>
   );
 }
 
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
+//////////////////////////////////////////////////////////////////////////////////
 
 const Drawer = createDrawerNavigator();
 
@@ -38,8 +27,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+        <Drawer.Screen name="HomeStack" component={HomeStack} />
+        <Drawer.Screen name="Category" component={Category} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
