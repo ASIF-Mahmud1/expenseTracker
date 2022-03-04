@@ -6,7 +6,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { increment} from './src/features/expense.slice'
 
 function HomeScreen({ navigation }) {
-  const count = useSelector(state => state.counter.value)
+ // const count=0
+   const count = useSelector(state => state.value)
+  console.log(useSelector(state => state));
   const dispatch= useDispatch()  
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
