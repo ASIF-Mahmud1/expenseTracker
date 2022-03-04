@@ -1,9 +1,37 @@
 
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from '../features/expense.slice'
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import storage from '@react-native-async-storage/async-storage';
 
-export default configureStore({
-  reducer: {
-    counter: counterReducer 
-  }
+
+import rootReducer from '../features/expense.slice'
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+  reducer: {expense: persistedReducer},
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
+
+export let persistor = persistStore(store)
+

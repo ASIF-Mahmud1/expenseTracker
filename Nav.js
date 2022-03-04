@@ -1,24 +1,24 @@
 import * as React from 'react';
-import { Button, View ,Text, TouchableOpacity} from 'react-native';
+import { Button, View, Text, TouchableOpacity } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux'
-import { increment} from './src/features/expense.slice'
+import { increment } from './src/features/expense.slice'
 
 function HomeScreen({ navigation }) {
- // const count=0
-   const count = useSelector(state => state.value)
-  console.log(useSelector(state => state));
-  const dispatch= useDispatch()  
+  
+  const expense = useSelector(state => state.expense.value)
+
+  const dispatch = useDispatch()
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Count {count}</Text>
+      <Text>Count {expense}</Text>
       {/* <Button
         onPress={() => navigation.navigate('Notifications')}
         title="Go to notifications"
       /> */}
-      <TouchableOpacity onPress={()=>{  dispatch(increment()) }}>
-          <Text>Increment</Text>
+      <TouchableOpacity onPress={() => { dispatch(increment()) }}>
+        <Text>Increment</Text>
       </TouchableOpacity>
     </View>
   );
