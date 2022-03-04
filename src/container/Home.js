@@ -1,5 +1,5 @@
 import  React,{Fragment} from 'react';
-import { Button, View, Text, TouchableOpacity,StyleSheet } from 'react-native';
+import { Button, View, Text, TouchableOpacity,StyleSheet,ScrollView } from 'react-native';
 import ExpenseList from '../component/home/ExpenseList'
 export default function Home({ navigation }) {
 
@@ -7,19 +7,28 @@ export default function Home({ navigation }) {
         navigation.navigate('NewExpense')
     }
 
-    return (
-      <Fragment >
-         <ExpenseList />
-         <TouchableOpacity style={styles.button} onPress={handleNavigation} >
-             <Text style={styles.text}>Add Expense</Text>
-          </TouchableOpacity>
-      </Fragment>
-    );
-  }
+  return (
+    <View style={styles.container} >
+      <ScrollView>
+        <ExpenseList />
+      </ScrollView>
+      <TouchableOpacity style={styles.button} onPress={handleNavigation} >
+        <Text style={styles.text}>Add Expense</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      paddingTop:5
+    },
     button: {
+      width:300,
       alignItems: 'center',
       justifyContent: 'center',
       marginTop:20,
