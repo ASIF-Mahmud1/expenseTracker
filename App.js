@@ -6,7 +6,7 @@ import store from './src/app/store'
 export default function Root(){
   return (
     <Provider store={store}>
-        <Authorised />
+        <Nav />
     </Provider>
   )
 }
