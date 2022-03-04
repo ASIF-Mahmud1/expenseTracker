@@ -2,7 +2,7 @@ import React,{ useState  } from 'react';
 import { StyleSheet, Text, View , TextInput,TouchableOpacity } from 'react-native';
 //import { Loader,showToast } from '../helper/component/Indicator';
 import { useSelector, useDispatch } from 'react-redux'
-import { signUpReducer} from '../../features/expense.slice'
+import { addExpense} from '../../features/expense.slice'
 export default function NewExpense({navigation}) {
    
   const [state,setState]= useState({
@@ -13,7 +13,8 @@ export default function NewExpense({navigation}) {
 
   const [loading,setLoading]= useState(false)
 
-  // const count = useSelector(state => state.counter.value)
+ const expenseList = useSelector(state => state.expense.expenseList)
+ console.log(expenseList);
   const dispatch = useDispatch()
 
 
@@ -22,16 +23,18 @@ export default function NewExpense({navigation}) {
      setState({...state, [key]:value})
   
   }
-  const registerUser = async () => {
+  const handleAddExpense = async () => {
 
-   
-    // if (state.email === '' || state.password === '') {
-     
-    //   // showToast('Enter details to signup!')
+    const disable = state.title === "" || state.price === "" || state.category === ""
+    if (disable === false) 
+    {
+       console.log(state);
+       dispatch(addExpense(state))
+    }
+    else {
+      // showToast('Enter details to signup!')
+    }
 
-    // } else {
-    //    setLoading(true)
-    // }
   }
 
 
@@ -51,7 +54,7 @@ export default function NewExpense({navigation}) {
           <TextInput placeholder='Price' placeholderTextColor="grey"  style={styles.input} value= {state.price} onChangeText={(value)=>   handleChannge('price',value)} />
           <TextInput placeholder='Category'  placeholderTextColor="grey"  style={styles.input}  value= {state.category} onChangeText={(value)=>  handleChannge('category',value)} />
       </View>
-      <TouchableOpacity  style={[styles.save]} onPress={registerUser}>
+      <TouchableOpacity   style={[styles.save]} onPress={handleAddExpense}>
          <Text style={[styles.btnText]} >   Save </Text>  
       </TouchableOpacity>     
 
