@@ -1,16 +1,22 @@
 import  React,{Fragment} from 'react';
 import { Button, View, Text, TouchableOpacity,StyleSheet,ScrollView } from 'react-native';
 import ExpenseList from '../component/home/ExpenseList'
+import { useSelector, useDispatch } from 'react-redux'
+import { addExpense} from '../features/expense.slice'
 export default function Home({ navigation }) {
 
-    const handleNavigation = () => {
-        navigation.navigate('NewExpense')
-    }
+  const expenseList = useSelector(state => state.expense.expenseList)
+  console.log(expenseList);
+  const dispatch = useDispatch()
+
+  const handleNavigation = () => {
+      navigation.navigate('NewExpense')
+  }
 
   return (
     <View style={styles.container} >
       <ScrollView>
-        <ExpenseList />
+        <ExpenseList expenseList={expenseList} />
       </ScrollView>
       <TouchableOpacity style={styles.button} onPress={handleNavigation} >
         <Text style={styles.text}>Add Expense</Text>
