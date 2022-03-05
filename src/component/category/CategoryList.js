@@ -1,6 +1,8 @@
 import React,{Fragment,useState} from 'react';
 import { Button, View, Text, TouchableOpacity ,StyleSheet} from 'react-native';
 import ModalPage from '../../helper/component/Modal';
+import { useSelector, useDispatch } from 'react-redux'
+import { getListOfCategory} from '../../helper/helper'
 export default function CategoryList({ navigation }) {
 
     const [modalVisible, setModalVisible] =useState(false)
@@ -9,6 +11,12 @@ export default function CategoryList({ navigation }) {
     const handleParentState=(newOption)=>{
       setOption(newOption)
     }
+
+
+const expenseList = useSelector(state => state.expense.expenseList)
+const result= getListOfCategory(expenseList)  
+console.log(result);
+
     return (
         
             <View style={styles.container}>
