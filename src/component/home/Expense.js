@@ -8,13 +8,17 @@ export default function Item({details, children}) {
 
   
   return (
-    <View style={[styles.container,]}>
+    <View>
 
 
-       <TouchableOpacity>
-        <Text>Category {category}</Text>
-        <Text>Title: {title}</Text>
-        <Text>Price: {price}</Text>
+       <TouchableOpacity style={styles.btn}>
+       
+       
+        <View style={{flexDirection:'row',justifyContent: 'space-between',}}>
+               <Text style={styles.text}> {title}</Text>
+              <Text style={styles.text}> {price} BDT</Text>
+        </View>
+        <Text style={styles.category}> {category}</Text>
       </TouchableOpacity>
           {children}
     </View>
@@ -23,33 +27,38 @@ export default function Item({details, children}) {
 
 const styles = StyleSheet.create({
   container: {
-    
+    display:'flex',
     marginBottom:25,
     borderRadius:10,
-    marginHorizontal:15
+    marginHorizontal:15,
+    alignItems:'center',
+    justifyContent:'center'
   },
-  cart: {
-    backgroundColor:'#50C878',
-    //opacity:0.8
 
-  },
   btn:{
-    height:50,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:'red',
-    width: 300,
-    marginBottom:10,
-    color:'red',
-    borderRadius:10
-  },
+      width:350,
+        backgroundColor: '#fff',
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderWidth: 2,
+        marginHorizontal: 15,
+        marginVertical: 10,
+        borderRadius: 25,
+        borderColor: '#71DEA3'
+    },
   text :
   {
-    color:'white',
-   fontSize:15,
+    color:'crimson',
+   fontSize:18,
    fontWeight:'bold',
    fontStyle:"italic",
    marginRight:5
+  },
+  category:{
+    color:'orange',
+    fontSize:15,
+    fontWeight:'bold',
+    fontStyle:"italic",
+    marginRight:5
   }
 });

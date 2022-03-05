@@ -14,7 +14,7 @@ export default function NewExpense({navigation}) {
   const [loading,setLoading]= useState(false)
 
  const expenseList = useSelector(state => state.expense.expenseList)
- console.log(expenseList);
+ 
   const dispatch = useDispatch()
 
 
@@ -29,7 +29,7 @@ export default function NewExpense({navigation}) {
     if (disable === false) 
     {
        const expense= {...state, date: Date.now()}
-       console.log(expense);
+      
        dispatch(addExpense(expense))
     }
     else {

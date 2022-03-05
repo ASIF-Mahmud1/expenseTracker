@@ -6,10 +6,10 @@ import Expense from './Expense'
 export default function ExpenseList({expenseList}) {
 
   const list= expenseList? expenseList:[]
-  console.log("List Here ",expenseList);
+  
   return (
     <View style={styles.container}>
-      <Text style={{color:'orange', fontWeight:"bold",fontSize:20, margin:5}}>My Expenses</Text>
+      <Text style={{color:'#71DEA3',fontSize:25, margin:5}}>My Expenses</Text>
       <ScrollView style={{ margin: 2 }}>
 
         {
