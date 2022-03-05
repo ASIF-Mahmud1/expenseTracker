@@ -107,9 +107,10 @@ const getExpenseByWeek=(items)=>{
 const getTotalPrice=(item)=>{
     let result=0
     item.forEach(ele=> {
-        result=result+ item.totalPrice
+    
+        result=result+ Number(ele.totalPrice)
     })
-    return result
+    return result ?result :0
 
 }
 

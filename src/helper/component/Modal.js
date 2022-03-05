@@ -25,10 +25,7 @@ const StatusList =({currentStatus,handleParentState })=>{
 const ModalPage = ({ modalVisible, setModalVisible,title,status,handleParentState })=> {
     const [taskStatus,setTaskStatus]=useState(status)
      useEffect(()=>{
-       if(taskStatus!=status)
-       {
         handleParentState(taskStatus)
-       }
      },[taskStatus])
 
     return(
