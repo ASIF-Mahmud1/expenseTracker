@@ -10,7 +10,7 @@ export const expenseSlice = createSlice({  // see 1.
   reducers: {
 
     addExpense:  (state, action) => {
-      console.log("addExpense reducer ", state)
+    
        state.expenseList =[...state.expenseList,action.payload]  },
   }
 })

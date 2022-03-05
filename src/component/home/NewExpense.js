@@ -1,6 +1,6 @@
 import React,{ useState  } from 'react';
 import { StyleSheet, Text, View , TextInput,TouchableOpacity } from 'react-native';
-//import { Loader,showToast } from '../helper/component/Indicator';
+import { Loader,showToast } from '../../helper/component/Indicator';
 import { useSelector, useDispatch } from 'react-redux'
 import { addExpense} from '../../features/expense.slice'
 export default function NewExpense({navigation}) {
@@ -31,16 +31,19 @@ export default function NewExpense({navigation}) {
        const expense= {...state, date: Date.now()}
       
        dispatch(addExpense(expense))
+       showToast('Expense is added to the list!')
+       handleNavigation()
     }
     else {
-      // showToast('Enter details to signup!')
+     
+      showToast('Please Fill all the details')
     }
 
   }
 
 
   const handleNavigation=()=>{
-     navigation.navigate("Events")
+     navigation.navigate("Home")
   }
   return (
     <View style={styles.container}>
