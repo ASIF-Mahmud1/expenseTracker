@@ -12,7 +12,6 @@
 
   
 
-
 ## [](https://github.com/ASIF-Mahmud1/Monkey-Music#demo-video-link)[Demo Video Link](https://drive.google.com/file/d/1BNDgneTYUufTfXU1ERBBAwHFEnNQmbRq/view?usp=sharing)
 
 A video recording of the application can be seen, by clicking on the link above.  
@@ -27,6 +26,9 @@ A video recording of the application can be seen, by clicking on the link above.
 
 4. Open a terminal run:  _**npm start**_
 
+## [Expo App Link](https://expo.dev/@asifmahmud1/expenseTracker)
+
+You can run the Expo App , by clicking on the link above.
 
 # [](https://github.com/ASIF-Mahmud1/Monkey-Music#testing)Testing
 
