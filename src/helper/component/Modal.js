@@ -5,7 +5,7 @@ import { FontAwesome ,Entypo } from '@expo/vector-icons';
 
 
 const StatusList =({currentStatus,handleParentState })=>{
-  const statusList= ["Open", "Working", "Completed"]
+  const statusList= ["Category","Day", "Week"]
   return (
     <Fragment>
     {
@@ -22,9 +22,14 @@ const StatusList =({currentStatus,handleParentState })=>{
     </Fragment>
   )
 }
-const ModalPage = ({ modalVisible, setModalVisible,title,status,id })=> {
+const ModalPage = ({ modalVisible, setModalVisible,title,status,handleParentState })=> {
     const [taskStatus,setTaskStatus]=useState(status)
-
+     useEffect(()=>{
+       if(taskStatus!=status)
+       {
+        handleParentState(taskStatus)
+       }
+     },[taskStatus])
 
     return(
         <View>

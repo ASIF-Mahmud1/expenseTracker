@@ -1,17 +1,24 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,useState} from 'react';
 import { Button, View, Text, TouchableOpacity ,StyleSheet} from 'react-native';
-
+import ModalPage from '../../helper/component/Modal';
 export default function CategoryList({ navigation }) {
+
+    const [modalVisible, setModalVisible] =useState(false)
+    const [option,setOption]= useState('Category')
+
+    const handleParentState=(newOption)=>{
+      setOption(newOption)
+    }
     return (
         
             <View style={styles.container}>
             
-            <TouchableOpacity  style={styles.button}>
+            <TouchableOpacity  style={styles.button} onPress={()=>setModalVisible(true)}>
                   <Text style={styles.text}>Select Other Option</Text>
             </TouchableOpacity>
-            <Text>Filtered By : </Text>
-            <Text style={{ marginLeft:10,fontSize: 16,fontStyle:"italic"}}>My Date</Text>
-
+            <Text>Filtered By :</Text>
+            <Text style={{ marginLeft:5,fontSize: 16,fontStyle:"italic",color:"orange"}}>{option}</Text>
+            <ModalPage  modalVisible={modalVisible}  setModalVisible={setModalVisible} handleParentState ={handleParentState} title={"Title"}  status={"Category"}/>
             </View>
 
         
@@ -37,6 +44,7 @@ export default function CategoryList({ navigation }) {
       borderRadius: 5,
       elevation: 3,
       backgroundColor: '#301934',
+      marginRight:4
       
     },
     text: {
