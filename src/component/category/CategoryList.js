@@ -1,22 +1,43 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState ,useEffect} from 'react';
 import { Button, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import ModalPage from '../../helper/component/Modal';
 import { useSelector, useDispatch } from 'react-redux'
-import { getListOfCategory } from '../../helper/helper'
+import { getListOfCategory,getExpenseByDay,getExpenseByWeek ,getTotalPrice} from '../../helper/helper'
 import SingleCategory from './SingleCategory'
 export default function CategoryList({ navigation }) {
 
   const [modalVisible, setModalVisible] = useState(false)
   const [option, setOption] = useState('Category')
+  const [categoryResult, setCategoryResult] = useState([])
+
+  const expenseList = useSelector(state => state.expense.expenseList)
+
 
   const handleParentState = (newOption) => {
     setOption(newOption)
   }
 
+  useEffect(()=>{
+    if(option==="Week")
+    {
+      const result = getExpenseByWeek(expenseList)
+      setCategoryResult(result)
+    }
+    else if(option==="Day")
+    {
+      const result = getExpenseByDay(expenseList)
+      setCategoryResult(result)
+    }
+    else 
+    {
+      const result = getListOfCategory(expenseList)
+      setCategoryResult(result)
+    }
 
-  const expenseList = useSelector(state => state.expense.expenseList)
-  const result = getListOfCategory(expenseList)
-  console.log(result);
+  },[option])
+
+  
+  const totalPrice= getTotalPrice(categoryResult)
 
   return (
     <View>
@@ -28,15 +49,20 @@ export default function CategoryList({ navigation }) {
           <Text style={styles.text}>Select Other Option</Text>
         </TouchableOpacity>
         <Text>Filtered By :</Text>
-        <Text style={{ marginLeft: 5, fontSize: 16, fontStyle: "italic", color: "orange" }}>{option}</Text>
+        <Text style={{ marginLeft: 5, fontSize: 18, fontStyle: "italic", color: "orange",fontWeight:'bold' }}>{option}</Text>
       </View>
+      <TouchableOpacity style={styles.totalPricecontainer}>
+            <Text style={styles.title}>  {"Total"}</Text>
+            <Text style={styles.totalPrice} >  {totalPrice} BDT </Text>
+      </TouchableOpacity>
+      
       {
-        result.map((item) => {
-          return <SingleCategory key={item.date} details={item} />
+        categoryResult.map((item) => {
+          return <SingleCategory key={item.title+item.totalPrice} details={item} />
         })
       }
 
-      <ModalPage modalVisible={modalVisible} setModalVisible={setModalVisible} handleParentState={handleParentState} title={"Title"} status={"Category"} />
+      <ModalPage modalVisible={modalVisible} setModalVisible={setModalVisible} handleParentState={handleParentState} title={"Filter By"} status={"Category"} />
 
     </View>
 
@@ -72,4 +98,30 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: 'white',
   },
+
+  totalPricecontainer: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderWidth: 2,
+    marginHorizontal: 15,
+    marginVertical: 10,
+    borderRadius: 10,
+    borderColor: 'grey'
+},
+title: {
+    fontSize: 20,
+    color: 'crimson',
+    fontWeight:'bold',
+    fontStyle:'italic'
+},
+totalPrice: {
+    fontSize: 18,
+    color: '#71DEA3',
+    fontWeight:'bold',
+    fontStyle:'italic'
+}
 });
