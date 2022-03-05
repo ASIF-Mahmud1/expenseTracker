@@ -28,8 +28,9 @@ export default function NewExpense({navigation}) {
     const disable = state.title === "" || state.price === "" || state.category === ""
     if (disable === false) 
     {
-       console.log(state);
-       dispatch(addExpense(state))
+       const expense= {...state, date: Date.now()}
+       console.log(expense);
+       dispatch(addExpense(expense))
     }
     else {
       // showToast('Enter details to signup!')
